@@ -13,9 +13,9 @@ IMAGE_HEIGHT = config.IMAGE_HEIGHT
 IMAGE_WIDTH = config.IMAGE_WIDTH
 CHARS_NUM = config.CHARS_NUM
 
-TEST_SIZE = 10000
-TRAIN_SIZE = 5000000
-VALID_SIZE = 2000000
+TEST_SIZE = 1000
+TRAIN_SIZE = 50000
+VALID_SIZE = 20000
 
 FLAGS = None
 
@@ -44,6 +44,7 @@ def gen(gen_dir, total_size, chars_num):
     for i in range(total_size):
         label = ''.join(random.sample(char_sets, chars_num))
         image.write(label, os.path.join(gen_dir, label+'_num'+str(i)+'.png'))
+        print('%s is ok!' % os.path.join(gen_dir, label+'_num'+str(i)+'.png'))
 
 
 if __name__ == '__main__':
