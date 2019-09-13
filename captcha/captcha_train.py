@@ -20,7 +20,7 @@ def run_train():
         images, labels = captcha.inputs(
             train=True, batch_size=FLAGS.batch_size)
 
-        logits = captcha.inference(images, keep_prob=0.75)
+        logits = captcha.inference(images, keep_prob=1)
 
         loss = captcha.loss(logits, labels)
 
