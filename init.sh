@@ -18,4 +18,8 @@ pip3 install numpy
 pip3 install matplotlib
 pip3 install tensorflow-gpu
 
-python3 tensorflow_cnn_train.py
+cd captcha
+
+python3 captcha_gen_default.py
+python3 captcha_records.py
+python3 captcha_train.py
