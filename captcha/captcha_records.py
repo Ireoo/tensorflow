@@ -52,7 +52,8 @@ def conver_to_tfrecords(data_set, name):
         os.makedirs(RECORD_DIR)
     filename = os.path.join(RECORD_DIR, name)
     print('>> Writing', filename)
-    writer = tf.python_io.TFRecordWriter(filename)
+    writer = tf.io.TFRecordWriter(filename)
+    print(data_set)
     num_examples = len(data_set)
     for index in range(num_examples):
         image = data_set[index][0]
@@ -95,7 +96,7 @@ def create_data_list(image_dir):
         label_name = os.path.basename(file_name).split('_')[0]
         images.append(input_img)
         labels.append(label_name)
-    return zip(images, labels)
+    return list(zip(images, labels))
 
 
 def main(_):
@@ -121,4 +122,4 @@ if __name__ == '__main__':
         help='Directory validation to get captcha data files and write the converted result.'
     )
     FLAGS, unparsed = parser.parse_known_args()
-    tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+    tf.compat.v1.app.run(main=main, argv=[sys.argv[0]] + unparsed)

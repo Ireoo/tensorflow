@@ -106,3 +106,4 @@ venv.bak/
 #nodejs
 node_modules
 captcha/data/
+captcha_train
