@@ -47,6 +47,8 @@ def run_train():
 
             sess.run(init_op)
 
+            writer = tf.summary.FileWriter('./logs/', sess.graph)
+
             # load DATA
             if hasCheckpoint():
                 saver.restore(
@@ -76,6 +78,7 @@ def run_train():
             finally:
                 coord.request_stop()
             coord.join(threads)
+            writer.close()
         # sess.close()
 
 
