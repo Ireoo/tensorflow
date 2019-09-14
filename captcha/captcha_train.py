@@ -6,11 +6,25 @@ import time
 from datetime import datetime
 import argparse
 import sys
+import os
 
 import tensorflow as tf
 import captcha_model as captcha
 
 FLAGS = None
+
+
+def hasCheckpoint():
+    for _, _, files in os.walk('./captcha_train'):
+        ex = False
+        # print('root_dir:', root)  # 当前目录路径
+        # print('sub_dirs:', dirs)  # 当前路径下所有子目录
+        # print('files:', files)  # 当前路径下所有非目录子文件
+        for file in files:
+            if file == 'checkpoint':
+                ex = True
+        # print(_dirs)
+        return ex
 
 
 def run_train():
@@ -34,8 +48,9 @@ def run_train():
             sess.run(init_op)
 
             # load DATA
-            saver.restore(sess, tf.train.latest_checkpoint(
-                FLAGS.checkpoint_dir))
+            if hasCheckpoint():
+                saver.restore(
+                    sess, tf.train.latest_checkpoint('./captcha_train'))
 
             coord = tf.train.Coordinator()
             threads = tf.train.start_queue_runners(sess=sess, coord=coord)
